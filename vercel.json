@@ -1,0 +1,17 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "regions": ["sin1"],
+  "env": {
+    "DATABASE_URL": "@database-url",
+    "ADMIN_PASSWORD": "@admin-password",
+    "SMTP_HOST": "@smtp-host",
+    "SMTP_PORT": "@smtp-port",
+    "SMTP_USER": "@smtp-user",
+    "SMTP_PASS": "@smtp-pass",
+    "SMTP_FROM": "@smtp-from",
+    "NEXT_PUBLIC_APP_URL": "@app-url"
+  }
+}

@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-ibm: 'IBM Plex Sans Thai', system-ui, sans-serif;
+  --font-jetbrains: 'IBM Plex Mono', monospace;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-ibm);
+    background: #0a0a1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track { background: #0f0f23; }
+  ::-webkit-scrollbar-thumb { background: #2d2d5e; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #4451f6; }
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-hover {
+    transition: all 0.2s ease;
+  }
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(68, 81, 246, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(68, 81, 246, 0.15);
+  }
+
+  .btn-primary {
+    @apply bg-brand-500 hover:bg-brand-600 text-white font-semibold px-5 py-2.5 rounded-lg transition-all duration-200 text-sm;
+  }
+  .btn-primary:hover {
+    box-shadow: 0 0 20px rgba(68, 81, 246, 0.4);
+  }
+
+  .btn-secondary {
+    @apply glass glass-hover text-slate-300 hover:text-white font-medium px-5 py-2.5 rounded-lg transition-all duration-200 text-sm;
+  }
+
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500/60 focus:bg-white/10 transition-all duration-200;
+  }
+
+  .card {
+    @apply glass rounded-xl p-5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+}
+
+/* Animated grid background */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(68, 81, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(68, 81, 246, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow effects */
+.glow-blue {
+  box-shadow: 0 0 40px rgba(68, 81, 246, 0.3);
+}
+
+/* Tag chip */
+.tag-chip {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-mono font-medium;
+  background: rgba(68, 81, 246, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(68, 81, 246, 0.25);
+  transition: all 0.15s ease;
+}
+.tag-chip:hover {
+  background: rgba(68, 81, 246, 0.3);
+  color: #a5b4fc;
+}
+
+/* Priority badges */
+.priority-low { @apply badge; background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+.priority-medium { @apply badge; background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+.priority-high { @apply badge; background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+.priority-critical { @apply badge; background: rgba(220, 38, 38, 0.2); color: #fc8181; border: 1px solid rgba(220,38,38,0.4); animation: pulse 2s infinite; }
+
+.prose-dark {
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+.prose-dark h3 { color: #f1f5f9; font-weight: 600; margin-top: 1.5em; }
+.prose-dark p { margin-bottom: 1em; }

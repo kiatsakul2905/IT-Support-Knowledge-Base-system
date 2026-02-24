@@ -15,7 +15,7 @@ export async function sendIssueNotification(issue: {
   id: string
   reporter_name: string
   reporter_email: string
-  reporter_department: string
+    reporter_department: string | null
   title: string
   description: string
   priority: string

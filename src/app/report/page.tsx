@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react'
+"use client"
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -26,9 +26,9 @@ export default function ReportPage() {
   })
   const [categories, setCategories] = useState<any[]>([])
 
-  useState(() => {
+  useEffect(() => {
     fetch('/api/categories').then(r => r.json()).then(setCategories)
-  })
+  }, [])
 
   const set = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }))
 

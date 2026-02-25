@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { th } from 'date-fns/locale'
@@ -16,6 +18,18 @@ const STATUS_STYLE: Record<string, string> = {
 const STATUS_TH: Record<string, string> = { open: 'รอดำเนินการ', in_progress: 'กำลังดำเนินการ', resolved: 'แก้ไขแล้ว', closed: 'ปิด' }
 
 async function getIssues() {
+  if (process.env.NODE_ENV === 'development') {
+    try {
+      const res = await fetch('http://localhost:3000/api/debug/issues', { cache: 'no-store' })
+      if (!res.ok) return []
+      const body = await res.json()
+      return body.issues || []
+    } catch (err) {
+      console.error('getIssues fetch dev error', err)
+      return []
+    }
+  }
+
   return await sql`
     SELECT ir.*, c.name as category_name
     FROM issue_reports ir
@@ -28,6 +42,13 @@ async function getIssues() {
 
 export default async function AdminIssues() {
   const issues = await getIssues()
+  console.log('AdminIssues - fetched issues count:', Array.isArray(issues) ? issues.length : typeof issues)
+  try {
+    console.log('AdminIssues - sample:', JSON.stringify((Array.isArray(issues) ? issues.slice(0,3) : issues)))
+  } catch (e) {
+    console.log('AdminIssues - sample log failed', String(e))
+  }
+  console.log('AdminIssues - DATABASE_URL prefix:', typeof process.env.DATABASE_URL === 'string' ? process.env.DATABASE_URL.slice(0,40) : String(process.env.DATABASE_URL))
 
   return (
     <div className="space-y-5 animate-fade-in">

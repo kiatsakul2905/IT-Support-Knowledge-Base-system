@@ -5,6 +5,8 @@ import { th } from 'date-fns/locale'
 import sql from '@/lib/db'
 import IssueStatusUpdate from '@/components/IssueStatusUpdate'
 
+export const dynamic = 'force-dynamic'
+
 const PRIORITY_TH: Record<string, string> = { low: 'ต่ำ', medium: 'กลาง', high: 'สูง', critical: 'วิกฤต' }
 const PRIORITY_COLOR: Record<string, string> = { low: '#22c55e', medium: '#f59e0b', high: '#ef4444', critical: '#dc2626' }
 
